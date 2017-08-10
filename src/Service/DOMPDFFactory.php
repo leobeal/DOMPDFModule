@@ -22,7 +22,8 @@ namespace DOMPDFModule\Service;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DOMPDFFactory implements FactoryInterface
 {
@@ -35,5 +36,10 @@ class DOMPDFFactory implements FactoryInterface
 
         $options = new Options($config);
         return new Dompdf($options);
+    }
+
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        return $this($serviceLocator, '');
     }
 }
